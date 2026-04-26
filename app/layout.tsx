@@ -1,16 +1,14 @@
-import type { Metadata, Viewport } from 'next'
-import { Inter, Geist } from 'next/font/google'
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const _geist = Geist({ subsets: ["latin"] });
+const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Stepzy - AI Homework Explainer',
-  description: 'Upload a question or paste your homework and get a clear step-by-step explanation powered by AI.',
+  title: 'Stepzy - AI-Powered Homework Helper',
+  description: 'Solve any homework problem instantly with AI. Upload a photo and get step-by-step explanations.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -31,18 +29,14 @@ export const metadata: Metadata = {
   },
 }
 
-export const viewport: Viewport = {
-  themeColor: '#0d9488',
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
-      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+    <html lang="en">
+      <body className="font-sans antialiased">
         {children}
         <Analytics />
       </body>
