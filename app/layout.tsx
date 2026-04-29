@@ -7,12 +7,39 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Stepzy - AI-Powered Homework Helper',
-  description: 'Solve any homework problem instantly with AI. Upload a photo and get step-by-step explanations.',
+  title: 'Stepzy — Snap. Solve. Understand.',
+  description: 'Stepzy is your AI-powered homework helper. Snap a photo of any problem and get instant step-by-step solutions for math, science, and more.',
+  keywords: [
+    'AI homework helper',
+    'math problem solver',
+    'AI tutor',
+    'step by step math',
+    'homework AI',
+    'photo math solver',
+    'instant homework help',
+    'AI study assistant',
+  ],
+  authors: [{ name: 'Stepzy' }],
+  creator: 'Stepzy',
+  metadataBase: new URL('https://stepzy-ten.vercel.app'),
+  openGraph: {
+    title: 'Stepzy — Snap. Solve. Understand.',
+    description: 'Snap a photo of any homework problem and get instant AI-powered step-by-step solutions.',
+    url: 'https://stepzy-ten.vercel.app',
+    siteName: 'Stepzy',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Stepzy — Snap. Solve. Understand.',
+    description: 'Snap a photo of any homework problem and get instant AI-powered step-by-step solutions.',
+    creator: '@stepzy',
+  },
   generator: 'v0.app',
   verification: {
-  google: '-F3hSYpUSZsgy2bn-LKhGHAb0vCPsJ0DkbAMuO54iPI',
-},
+    google: '-F3hSYpUSZsgy2bn-LKhGHAb0vCPsJ0DkbAMuO54iPI',
+  },
   icons: {
     icon: [
       {
