@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   description: 'Solve any homework problem instantly with AI. Upload a photo and get step-by-step explanations.',
   generator: 'v0.app',
   verification: {
-    google: '74c552bd65d3378f',
-  },
+  google: '-F3hSYpUSZsgy2bn-LKhGHAb0vCPsJ0DkbAMuO54iPI',
+},
   icons: {
     icon: [
       {
