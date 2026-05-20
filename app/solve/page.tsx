@@ -178,7 +178,7 @@ const ChatMessageItem = ({
   >
     <div className={cn("flex gap-3 w-full", message.role === "user" ? "flex-row-reverse" : "flex-row")}>
       <div className={cn("w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1",
-        message.role === "user" ? "bg-primary/20 border border-primary/40" : "bg-card/60 border border-border/50")}>
+        message.role === "user" ? "bg-primary/20 border border-primary/40" : "bg-gray-100 border border-gray-200")}>
         {message.role === "user" ? <User className="w-4 h-4 text-primary" /> : <Bot className="w-4 h-4 text-muted-foreground" />}
       </div>
       <div className={cn("max-w-[80%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed",
@@ -454,11 +454,11 @@ function SolvePageInner() {
         <Scene3D />
 
         {activeTab === "chat" && (
-          <div className="fixed inset-0 z-40 flex flex-col" style={{ background: "rgba(8,8,8,0.98)" }}>
+          <div className="fixed inset-0 z-40 flex flex-col" style={{ background: "rgba(255,255,255,0.98)" }}>
             <Scene3D />
 
             <div className="relative z-10 flex items-center justify-between px-6 py-3 backdrop-blur-xl flex-shrink-0"
-              style={{ background: "rgba(8,8,8,0.9)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              style={{ background: "rgba(255,255,255,0.95)", borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
               <div className="flex items-center gap-4">
                 <Link href="/"><MotionButton label="Back" /></Link>
                 <div className="w-px h-6 bg-border/20" />
@@ -517,7 +517,7 @@ function SolvePageInner() {
                         <motion.button key={text} onClick={() => sendChatMessage(text)}
                           whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }}
                           className="flex items-start gap-3 px-4 py-3.5 rounded-xl text-left transition-all"
-                          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                          style={{ background: "rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.06)" }}>
                           <span className="text-xl mt-0.5">{icon}</span>
                           <div>
                             <p className="text-sm font-semibold text-foreground">{text}</p>
@@ -557,10 +557,10 @@ function SolvePageInner() {
               </div>
             </div>
 
-            <div className="relative z-10 px-4 pb-5 pt-3 flex-shrink-0" style={{ background: "rgba(8,8,8,0.9)" }}>
+            <div className="relative z-10 px-4 pb-5 pt-3 flex-shrink-0" style={{ background: "rgba(255,255,255,0.95)" }}>
               <div className="max-w-3xl mx-auto">
                 <div className="rounded-3xl overflow-hidden transition-all duration-300"
-                  style={{ background: "rgba(31,32,35,0.95)", border: isListening ? "1px solid rgba(20,184,166,0.5)" : "1px solid rgba(68,68,68,0.8)", boxShadow: "0 8px 30px rgba(0,0,0,0.24)" }}>
+                  style={{ background: "rgba(245,245,245,0.95)", border: isListening ? "1px solid rgba(20,184,166,0.5)" : "1px solid rgba(0,0,0,0.12)", boxShadow: "0 8px 30px rgba(0,0,0,0.08)" }}>
                   <AnimatePresence>
                     {chatImagePreview && (
                       <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex flex-wrap gap-2 px-3 pt-3">
@@ -584,23 +584,23 @@ function SolvePageInner() {
                   <textarea ref={chatInputRef} value={chatInput} onChange={e => setChatInput(e.target.value)}
                     onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChatMessage() } }}
                     placeholder={isListening ? "Listening..." : "Message Stepzy AI..."}
-                    className="w-full bg-transparent text-gray-100 placeholder:text-gray-500 resize-none outline-none focus:ring-0 text-base leading-relaxed px-4 pt-4 pb-2 min-h-[56px] max-h-[200px]"
+                    className="w-full bg-transparent text-gray-900 placeholder:text-gray-400 resize-none outline-none focus:ring-0 text-base leading-relaxed px-4 pt-4 pb-2 min-h-[56px] max-h-[200px]"
                     rows={1} />
                   <div className="flex items-center justify-between gap-2 px-3 pb-3 pt-1">
                     <div className="flex items-center gap-1">
                       <input ref={chatFileInputRef} type="file" accept="image/*" className="hidden" onChange={handleChatImageSelect} />
                       <motion.button type="button" onClick={() => chatFileInputRef.current?.click()}
-                        className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-200 hover:bg-white/10 transition-all"
+                        className="flex h-8 w-8 items-center justify-center rounded-full text-gray-500 hover:text-gray-700 hover:bg-black/5 transition-all"
                         whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} title="Attach image">
                         <Plus className="w-5 h-5" />
                       </motion.button>
                       <motion.button type="button" onClick={() => setShowChatCamera(true)}
-                        className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-200 hover:bg-white/10 transition-all"
+                        className="flex h-8 w-8 items-center justify-center rounded-full text-gray-500 hover:text-gray-700 hover:bg-black/5 transition-all"
                         whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} title="Take photo">
                         <Camera className="w-4 h-4" />
                       </motion.button>
-                      <div className="h-4 w-px bg-white/10 mx-1" />
-                      <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs text-gray-500 border border-white/5">
+                      <div className="h-4 w-px bg-black/10 mx-1" />
+                      <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs text-gray-400 border border-black/10">
                         <span>Sonnet 4.6</span>
                       </div>
                     </div>
@@ -608,7 +608,7 @@ function SolvePageInner() {
                       {isVoiceSupported && (
                         <motion.button onClick={toggleVoice}
                           className={cn("flex h-8 items-center gap-1.5 rounded-full px-2 border transition-all",
-                            isListening ? "bg-primary/15 border-primary/50 text-primary" : "bg-transparent border-transparent text-gray-400 hover:text-gray-200 hover:bg-white/10")}
+                            isListening ? "bg-primary/15 border-primary/50 text-primary" : "bg-transparent border-transparent text-gray-500 hover:text-gray-700 hover:bg-black/5")}
                           whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                           animate={isListening ? { scale: [1, 1.05, 1] } : {}} transition={isListening ? { duration: 1.2, repeat: Infinity } : {}}>
                           {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
@@ -623,7 +623,7 @@ function SolvePageInner() {
                       <motion.button onClick={() => sendChatMessage()}
                         disabled={(!chatInput.trim() && !chatImagePreview) || isChatLoading}
                         className={cn("w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all font-medium",
-                          (chatInput.trim() || chatImagePreview) && !isChatLoading ? "bg-white text-black hover:bg-white/80" : "bg-white/5 text-gray-600 cursor-not-allowed")}
+                          (chatInput.trim() || chatImagePreview) && !isChatLoading ? "bg-black text-white hover:bg-black/80" : "bg-gray-200 text-gray-400 cursor-not-allowed")}
                         whileHover={(chatInput.trim() || chatImagePreview) ? { scale: 1.05 } : {}}
                         whileTap={(chatInput.trim() || chatImagePreview) ? { scale: 0.95 } : {}}>
                         {isChatLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
@@ -631,7 +631,7 @@ function SolvePageInner() {
                     </div>
                   </div>
                 </div>
-                <p className="text-xs text-gray-600 mt-2 text-center">Enter to send · Shift+Enter for new line</p>
+                <p className="text-xs text-gray-400 mt-2 text-center">Enter to send · Shift+Enter for new line</p>
               </div>
             </div>
 
@@ -674,10 +674,10 @@ function SolvePageInner() {
 
         {activeTab !== "chat" && (
           <>
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-7 left-10 z-50">
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-4 left-4 md:top-7 md:left-10 z-50">
               <Link href="/"><MotionButton label="Back" /></Link>
             </motion.div>
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-7 right-10 z-[200]">
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-4 right-4 md:top-7 md:right-10 z-[200]">
               <SettingsPanel />
             </motion.div>
 
@@ -697,10 +697,10 @@ function SolvePageInner() {
 
                 {/* 탭 + 고난도 토글 */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="flex justify-center items-center gap-4 mb-10">
-                  <div className="inline-flex p-1.5 gap-1 rounded-2xl backdrop-blur-xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <div className="flex p-1.5 gap-1 rounded-2xl backdrop-blur-xl overflow-x-auto max-w-[90vw] md:max-w-none md:inline-flex" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
                     {tabs.map(({ id, label, icon: Icon }) => (
                       <button key={id} onClick={() => switchTab(id)}
-                        className={cn("flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200",
+                        className={cn("flex items-center gap-2 px-3 md:px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200 whitespace-nowrap flex-shrink-0",
                           activeTab === id ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-foreground hover:bg-white/5")}>
                         <Icon className="w-4 h-4" />{label}
                       </button>
