@@ -180,7 +180,9 @@ const ChatMessageItem = ({
       <div className="max-w-[75%]">
         {message.image && (
           <div className="mb-2 flex justify-end">
-            <img src={message.image} alt="uploaded" className="max-h-48 rounded-2xl object-contain" />
+            <div className="w-48 h-48 rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
+              <img src={message.image} alt="uploaded" className="w-full h-full object-cover rounded-2xl" />
+            </div>
           </div>
         )}
         <div className="px-5 py-3.5 text-[15px] leading-relaxed text-foreground"
