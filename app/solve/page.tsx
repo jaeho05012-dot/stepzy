@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   Upload, Camera, Sparkles, X, Loader2, CheckCircle, Pencil,
-  Bot, User, MessageCircle, Mic, MicOff, Image, Plus, Send,
+  Bot, MessageCircle, Mic, MicOff, Image, Plus, Send,
   Copy, RotateCcw, ThumbsUp, ThumbsDown, Check, Zap
 } from "lucide-react"
 import Link from "next/link"
@@ -128,7 +128,7 @@ const MessageActions = ({
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2, delay: 0.15 }}
-      className={cn("flex items-center gap-0.5 mt-1", message.role === "user" ? "justify-end" : "justify-start pl-11")}
+      className={cn("flex items-center gap-0.5 mt-1", message.role === "user" ? "justify-end" : "justify-start pl-1")}
     >
       <motion.button onClick={handleCopy} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} title="Copy"
         className="flex items-center justify-center w-7 h-7 rounded-lg text-muted-foreground/35 hover:text-muted-foreground/70 hover:bg-white/5 transition-all">
@@ -176,19 +176,23 @@ const ChatMessageItem = ({
     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
     className={cn("flex flex-col mb-5", message.role === "user" ? "items-end" : "items-start")}
   >
-    <div className={cn("flex gap-3 w-full", message.role === "user" ? "flex-row-reverse" : "flex-row")}>
-      <div className={cn("w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1",
-        message.role === "user" ? "bg-primary/20 border border-primary/40" : "bg-card/60 border border-border/50")}>
-        {message.role === "user" ? <User className="w-4 h-4 text-primary" /> : <Bot className="w-4 h-4 text-muted-foreground" />}
+    {message.role === "user" ? (
+      <div className="max-w-[75%]">
+        {message.image && (
+          <div className="mb-2 flex justify-end">
+            <img src={message.image} alt="uploaded" className="max-h-48 rounded-2xl object-contain" />
+          </div>
+        )}
+        <div className="px-5 py-3.5 text-[15px] leading-relaxed text-foreground"
+          style={{ background: "rgba(255,255,255,0.08)", borderRadius: "20px 20px 4px 20px" }}>
+          <p className="whitespace-pre-wrap">{message.content}</p>
+        </div>
       </div>
-      <div className={cn("max-w-[80%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed",
-        message.role === "user"
-          ? "bg-primary/15 border border-primary/20 text-foreground rounded-tr-sm"
-          : "bg-transparent text-foreground rounded-tl-sm")}>
-        {message.image && <img src={message.image} alt="uploaded" className="mb-3 max-h-48 rounded-xl border border-border/30 object-contain" />}
+    ) : (
+      <div className="max-w-[85%] pl-1">
         <SolutionContent solution={message.content} />
       </div>
-    </div>
+    )}
     {!isStreaming && message.content && <MessageActions message={message} onRetry={onRetry} isLast={isLast} />}
   </motion.div>
 )
