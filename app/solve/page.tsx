@@ -177,16 +177,14 @@ const ChatMessageItem = ({
     className={cn("flex flex-col mb-5", message.role === "user" ? "items-end" : "items-start")}
   >
     {message.role === "user" ? (
-      <div className="max-w-[75%]">
-        {message.image && (
-          <div className="mb-2 flex justify-end">
-            <div className="w-48 h-48 rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
-              <img src={message.image} alt="uploaded" className="w-full h-full object-cover rounded-2xl" />
+      <div className="max-w-[70%]">
+        <div className="px-4 py-3 text-[15px] leading-relaxed text-foreground"
+          style={{ background: "rgba(255,255,255,0.08)", borderRadius: "18px 18px 4px 18px" }}>
+          {message.image && (
+            <div className="mb-2.5 rounded-xl overflow-hidden" style={{ background: "rgba(0,0,0,0.3)" }}>
+              <img src={message.image} alt="uploaded" className="w-full max-h-56 object-cover rounded-xl" />
             </div>
-          </div>
-        )}
-        <div className="px-5 py-3.5 text-[15px] leading-relaxed text-foreground"
-          style={{ background: "rgba(255,255,255,0.08)", borderRadius: "20px 20px 4px 20px" }}>
+          )}
           <p className="whitespace-pre-wrap">{message.content}</p>
         </div>
       </div>
