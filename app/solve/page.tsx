@@ -338,7 +338,11 @@ function SolvePageInner() {
         const { done, value } = await reader.read()
         if (done) break
         result += decoder.decode(value, { stream: true })
-        setChatMessages([...newMessages, { role: "assistant", content: result }])
+        setChatMessages(prev => {
+          const updated = [...prev]
+          updated[updated.length - 1] = { ...updated[updated.length - 1], content: result }
+          return updated
+        })
       }
     } catch {
       setChatMessages([...newMessages, { role: "assistant", content: "Something went wrong. Please try again." }])
@@ -372,7 +376,11 @@ function SolvePageInner() {
         const { done, value } = await reader.read()
         if (done) break
         result += decoder.decode(value, { stream: true })
-        setChatMessages([...withoutLast, { role: "assistant", content: result }])
+        setChatMessages(prev => {
+          const updated = [...prev]
+          updated[updated.length - 1] = { ...updated[updated.length - 1], content: result }
+          return updated
+        })
       }
     } catch {
       setChatMessages([...withoutLast, { role: "assistant", content: "Something went wrong." }])
