@@ -174,33 +174,26 @@ const ChatMessageItem = ({
 }) => (
   <motion.div
     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
-    className={cn("flex mb-5", message.role === "user" ? "justify-end" : "justify-start items-start gap-3")}
+    className={cn("flex flex-col mb-5", message.role === "user" ? "items-end" : "items-start")}
   >
-    {message.role === "assistant" && (
-      <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
-        style={{ background: "rgba(20,184,166,0.15)", border: "1px solid rgba(20,184,166,0.3)" }}>
-        <Bot className="w-3.5 h-3.5 text-primary" />
-      </div>
-    )}
-    <div className={cn("flex flex-col", message.role === "user" ? "items-end max-w-[70%]" : "items-start max-w-[80%]")}>
-      {message.role === "user" ? (
+    {message.role === "user" ? (
+      <div className="max-w-[70%]">
         <div className="px-4 py-3 text-[15px] leading-relaxed text-foreground"
-          style={{ background: "rgba(20,184,166,0.12)", borderRadius: "18px 18px 4px 18px" }}>
+          style={{ background: "rgba(255,255,255,0.08)", borderRadius: "18px 18px 4px 18px" }}>
           {message.image && (
-            <div className="mb-2.5 rounded-xl overflow-hidden" style={{ background: "rgba(0,0,0,0.3)", maxWidth: "240px" }}>
-              <img src={message.image} alt="uploaded" className="w-full max-h-[180px] object-cover rounded-xl" />
+            <div className="mb-2.5 rounded-xl overflow-hidden" style={{ background: "rgba(0,0,0,0.3)" }}>
+              <img src={message.image} alt="uploaded" className="w-full max-h-56 object-cover rounded-xl" />
             </div>
           )}
           <p className="whitespace-pre-wrap">{message.content}</p>
         </div>
-      ) : (
-        <div className="px-4 py-3 rounded-[20px] rounded-tl-md w-full"
-          style={{ background: "rgba(255,255,255,0.04)" }}>
-          <SolutionContent solution={message.content} />
-        </div>
-      )}
-      {!isStreaming && message.content && <MessageActions message={message} onRetry={onRetry} isLast={isLast} />}
-    </div>
+      </div>
+    ) : (
+      <div className="max-w-[85%] pl-1">
+        <SolutionContent solution={message.content} />
+      </div>
+    )}
+    {!isStreaming && message.content && <MessageActions message={message} onRetry={onRetry} isLast={isLast} />}
   </motion.div>
 )
 
@@ -503,7 +496,7 @@ function SolvePageInner() {
             </div>
 
             <div className="relative z-10 flex-1 overflow-y-auto">
-              <div className="max-w-2xl mx-auto px-4 py-8 w-full">
+              <div className="max-w-3xl mx-auto px-4 py-8 w-full">
                 {chatMessages.length === 0 && (
                   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     className="flex flex-col items-center justify-center min-h-[60vh] gap-8 text-center">
@@ -550,12 +543,11 @@ function SolvePageInner() {
                 })}
 
                 {isChatLoading && chatMessages[chatMessages.length - 1]?.role === "user" && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-3 mb-6 items-start">
-                    <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
-                      style={{ background: "rgba(20,184,166,0.15)", border: "1px solid rgba(20,184,166,0.3)" }}>
-                      <Bot className="w-3.5 h-3.5 text-primary" />
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-full bg-card/60 border border-border/50 flex items-center justify-center flex-shrink-0">
+                      <Bot className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="px-4 py-3 rounded-[20px] rounded-tl-md" style={{ background: "rgba(255,255,255,0.04)" }}>
+                    <div className="pt-2">
                       <div className="flex gap-1.5 items-center">
                         {[0, 1, 2].map(i => (
                           <motion.div key={i} className="w-2 h-2 rounded-full bg-primary/50"
@@ -570,7 +562,7 @@ function SolvePageInner() {
             </div>
 
             <div className="relative z-10 px-4 pb-5 pt-3 flex-shrink-0" style={{ background: "#080808" }}>
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-3xl mx-auto">
                 <div className="rounded-3xl overflow-hidden transition-all duration-300"
                   style={{ background: "rgba(31,32,35,0.95)", border: isListening ? "1px solid rgba(20,184,166,0.5)" : "1px solid rgba(68,68,68,0.8)", boxShadow: "0 8px 30px rgba(0,0,0,0.24)" }}>
                   <AnimatePresence>

@@ -119,11 +119,12 @@ $$\\boxed{answer}$$`
         ]
       : userPrompt
 
-    // ✅ 고난도 or h(t) 문제: 4000토큰, 일반: 1750토큰
-    const maxTokens = (hardMode || isHTproblem) ? 4000 : 1750
+    const maxTokens = (hardMode || isHTproblem) ? 8000
+      : isMultipleChoice ? 3000
+      : 2500
 
     const stream = await anthropic.messages.stream({
-      model: "claude-opus-4-6",
+      model: "claude-opus-4-8",
       max_tokens: maxTokens,
       temperature: 0,
       system: systemPrompt,

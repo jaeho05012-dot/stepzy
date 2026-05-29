@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
       if (!lastContent || lastContent === "이 문제를 풀어주세요." || lastContent === "이 문제를 풀어주세요") {
         const ocrResult = await client.messages.create({
-          model: "claude-opus-4-6",
+          model: "claude-opus-4-8",
           max_tokens: 800,
           system: "You are an OCR engine. Extract ALL text from the image completely and accurately. Include ALL answer choices (①②③④⑤ or 1.2.3.4.5 or A.B.C.D.E). No solving. Output the exact text only.",
           messages: [{
@@ -173,15 +173,20 @@ ${mathCore}
       return { role: m.role, content: m.content }
     })
 
-    // ── 6. 토큰 조절 (explain 방식: hardMode/h(t) → 4000, 그 외 → 1750) ──
+    // ── 6. 토큰 조절 ──
     const isMathProblem = compressedImage || isMultipleChoice || isHTproblem || isSphereShadow || isTangentCircle
-    const maxTokens = isMathProblem
-      ? (hardMode || isHTproblem) ? 4000 : 1750
-      : 2000
+    const maxTokens = context
+      ? 2000
+      : isMathProblem
+        ? (hardMode || isHTproblem) ? 8000
+          : isMultipleChoice ? 3000
+          : 2500
+        : 2000
 
     // ── 7. 스트리밍 ──
+    const model = (isMathProblem || context) ? "claude-opus-4-8" : "claude-sonnet-4-6"
     const stream = await client.messages.stream({
-      model: "claude-opus-4-6",
+      model,
       max_tokens: maxTokens,
       system: systemPrompt,
       messages: formattedMessages as Anthropic.MessageParam[],
