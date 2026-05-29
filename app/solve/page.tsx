@@ -60,7 +60,7 @@ const SolutionContent = ({ solution }: { solution: string }) => (
   <div className="prose prose-invert max-w-none">
     <ReactMarkdown
       remarkPlugins={[remarkMath]}
-      rehypePlugins={[rehypeKatex]}
+      rehypePlugins={[[rehypeKatex, { strict: false, throwOnError: false }]]}
       components={{
         p: ({ children }) => <p className="text-foreground/90 leading-relaxed text-base mb-3">{children}</p>,
         strong: ({ children }) => <strong className="text-foreground font-bold">{children}</strong>,
