@@ -286,10 +286,11 @@ function SolvePageInner() {
   const analyzeWithAI = async (question?: string, imageBase64?: string) => {
     setIsAnalyzing(true); setSolution(null)
     try {
+      const imageToSend = imageBase64 ? await compressImageClient(imageBase64) : undefined
       const res = await fetch("/api/explain", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({ question, imageBase64, hardMode }),
+        body: JSON.stringify({ question, imageBase64: imageToSend, hardMode }),
       })
       if (!res.ok) throw new Error("API error")
       if (!res.body) throw new Error("No stream")
