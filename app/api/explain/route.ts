@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import Anthropic from "@anthropic-ai/sdk"
 import { compressImage } from "@/lib/compress-image"
 
+export const maxDuration = 60
+
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 export async function POST(req: Request) {
@@ -121,7 +123,7 @@ $$\\boxed{answer}$$`
         ]
       : userPrompt
 
-    const maxTokens = (hardMode || isHTproblem) ? 8000
+    const maxTokens = (hardMode || isHTproblem) ? 5000
       : isMultipleChoice ? 3000
       : 2500
 

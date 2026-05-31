@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import Anthropic from "@anthropic-ai/sdk"
 import { compressImage } from "@/lib/compress-image"
 
+export const maxDuration = 60
+
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 })
@@ -179,7 +181,7 @@ ${mathCore}
     const maxTokens = context
       ? 2000
       : isMathProblem
-        ? (hardMode || isHTproblem) ? 8000
+        ? (hardMode || isHTproblem) ? 5000
           : isMultipleChoice ? 3000
           : 2500
         : 2000
