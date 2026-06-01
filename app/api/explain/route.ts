@@ -29,48 +29,41 @@ export async function POST(req: Request) {
       /\b[ABCDE]\./m.test(finalQuestion) ||
       /(선택지|보기|다음 중|옳은 것|틀린 것|고르면|골라|answer choice)/i.test(finalQuestion)
 
-    const isSphereShadow = /(구|공|그림자|손전등|지면)/.test(finalQuestion)
     const isHTproblem = /h\(t\)/.test(finalQuestion) || /교점.*개수|개수.*교점/.test(finalQuestion)
-    const isTangentCircle = /(접선|접점|부채꼴|원\s*O|원\s*O')/.test(finalQuestion)
 
-    const sphereRule = isSphereShadow ? `
-⚠️ 구 그림자 — 닮음비만 사용:
+    const sphereRule = `
+[구·공·그림자·손전등·지면 문제인 경우] 닮음비만 사용:
 AO = AH - r (A는 HO 위, H는 지면)
-닮음비: r : AO = x : AH → x = r×AH/AO
-넓이 = πx²
-절대 금지: 좌표계, 접선 방정식, m값 계산, 피타고라스로 접선길이 구하기` : ""
+닮음비: r : AO = x : AH → x = r×AH/AO, 넓이 = πx²
+절대 금지: 좌표계, 접선 방정식, m값 계산, 피타고라스로 접선길이 구하기`
 
-    const htRule = isHTproblem ? `
-⚠️ h(t) 문제 — 이 순서 그대로만:
+    const htRule = `
+[h(t) 또는 교점 개수 문제인 경우] 이 순서 그대로만:
 1. g'(x)=(x-1)f(x) 부호표로 극대/극소 위치 확인
 2. g(1), g(3) 수치 계산
 3. x→-∞ 거동 확인 (x<1 구간 최고차항)
 4. h(t) 값: t<극소 → 1, t=극소 → 2, 극소<t<극대 → 3, t=극대 → 2, t>극대 → 1
 5. |lim(t→a+)h(t) - lim(t→a-)h(t)|=2 인 a: 극대값과 극소값만 검토
 6. S = 조건 만족하는 모든 |a| 합산
-재검토/재확인 절대 금지. 표 금지.` : ""
+재검토/재확인 절대 금지. 표 금지.`
 
-  const tangentRule = isTangentCircle ? `
-⚠️ 접선/부채꼴 — 원이 커지는 문제:
+    const tangentRule = `
+[접선·접점·부채꼴·원 O 문제인 경우] 원이 커지는 문제:
 "원 O를 원 O'이 될 때까지 늘인다" = 하나의 원이 커지는 것, 두 개의 고정된 원이 아님!
 접점 A 고정 → PA 고정 → 원이 커지면 중심도 이동 (PO+OO' 방식 절대 금지)
 PO = √(PA² + r²), PO' = √(PA² + r'²) (각각 따로 계산)
 ∠APB = 2×arcsin(r/PO) ← 반드시 2배, 전체각
 ∠APC = 2×arcsin(r'/PO') ← 반드시 2배, 전체각
 ∠BPC = ∠APC - ∠APB ← 전체각끼리 빼기
-절대 금지: π/3 - π/4 같이 반각끼리 빼기 (∠BPC = π/12 나오면 틀린 것)
-절대 금지: PO = PO' 로 놓는 것, PO' = PO + OO' 방식
-PB = PC = PA (접선 길이)
-부채꼴 넓이 = ½ × PB² × ∠BPC (라디안)` : ""
+절대 금지: π/3 - π/4 같이 반각끼리 빼기, PO = PO' 로 놓는 것
+PB = PC = PA (접선 길이), 부채꼴 넓이 = ½ × PB² × ∠BPC (라디안)`
 
-    const isSequence = /(수열|점화식|a_n|an|등차|등비)/.test(finalQuestion)
-    const sequenceRule = isSequence ? `
-⚠️ 수열: 점화식 인덱스 n, n+1 혼동 금지
-등차/등비 판단 먼저, 일반항 구한 후 계산` : ""
+    const sequenceRule = `
+[수열·점화식·등차·등비 문제인 경우] 점화식 인덱스 n, n+1 혼동 금지
+등차/등비 판단 먼저, 일반항 구한 후 계산`
 
-    const isProbability = /(확률|경우의 수|조합|순열|nCr|nPr)/.test(finalQuestion)
-    const probabilityRule = isProbability ? `
-⚠️ 확률: 전체 경우의 수 먼저, 여사건 활용 검토` : ""
+    const probabilityRule = `
+[확률·경우의 수·조합·순열 문제인 경우] 전체 경우의 수 먼저, 여사건 활용 검토`
 
     const inverseIntegralRule = `
 ⚠️ 역함수 정적분: ∫f(x)dx + ∫g(y)dy = xy 공식 최우선 사용.
