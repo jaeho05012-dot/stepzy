@@ -115,6 +115,8 @@ $$\\boxed{answer}$$`
       model: "claude-opus-4-8",
       max_tokens: maxTokens,
       temperature: 0,
+      // @ts-ignore fast mode (research preview)
+      speed: "fast",
       system: systemPrompt,
       messages: [{ role: "user", content: claudeContent }],
     })
