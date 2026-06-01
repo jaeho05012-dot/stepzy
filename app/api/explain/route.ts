@@ -16,22 +16,6 @@ export async function POST(req: Request) {
 
     if (imageBase64) {
       compressedImage = await compressImage(imageBase64)
-
-      if (!finalQuestion) {
-        const ocrResult = await anthropic.messages.create({
-          model: "claude-haiku-4-5-20251001",
-          max_tokens: 800,
-          system: "You are an OCR engine. Extract ALL text from the image completely and accurately. Include ALL answer choices (①②③④⑤ or 1.2.3.4.5 or A.B.C.D.E). No solving. Output the exact text only.",
-          messages: [{
-            role: "user",
-            content: [
-              { type: "image", source: { type: "base64", media_type: compressedImage.mediaType, data: compressedImage.data } },
-              { type: "text", text: "Extract ALL text including answer choices exactly as written. Output text only." },
-            ],
-          }],
-        })
-        finalQuestion = ocrResult.content.filter(b => b.type === "text").map(b => (b as Anthropic.TextBlock).text).join("").trim()
-      }
     }
 
     if (!finalQuestion && !compressedImage) {
@@ -113,7 +97,7 @@ PB = PC = PA (접선 길이)
 $$\\boxed{answer}$$`
 
     const userPrompt = compressedImage
-      ? `풀어주세요.${finalQuestion ? `\nOCR: ${finalQuestion}` : ""}`
+      ? `이미지의 문제를 읽고 풀어주세요. 그림(그래프·도형)도 직접 보고 분석하세요.${finalQuestion ? `\n참고 텍스트: ${finalQuestion}` : ""}`
       : `풀어주세요.\n\n${finalQuestion}`
 
     const claudeContent: Anthropic.MessageParam["content"] = compressedImage
