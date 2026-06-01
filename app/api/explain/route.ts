@@ -69,10 +69,28 @@ PB = PC = PA (접선 길이), 부채꼴 넓이 = ½ × PB² × ∠BPC (라디안
 ⚠️ 역함수 정적분: ∫f(x)dx + ∫g(y)dy = xy 공식 최우선 사용.
 치환/부분적분보다 직사각형 넓이 해석 먼저. 다항식 나눗셈 시 반드시 검산.`
 
+    const hardModeExtra = (hardMode || isHTproblem) ? `
+⚠️ 고난도 문제 — 반드시 이 순서:
+1. 풀기 전 문제 구조 한 줄 파악
+2. 각 단계 계산 후 결과가 말이 되는지 체크
+3. 최종 답을 문제 조건에 대입해서 검증
+4. 풀이 중 모순 발견 시 처음부터 다시` : ""
+
+    const semicircleRule = `
+[반원·호 AB·∠PAB·∠QBA·정삼각형 STU 문제인 경우] 반원 기하 극한 — 이 순서 그대로:
+1. 좌표계: A=(-1,0), B=(1,0), 반원 중심 O=(0,0)
+2. 각도 조건으로 직선 AP, BQ 방정식 세우기
+3. 교점 R 좌표를 θ로 표현
+4. θ→0 극한: tanθ≈θ, sinθ≈θ, cosθ≈1 근사 사용
+5. f(θ), g(θ)를 θ의 거듭제곱으로 표현
+6. 극한값 = g(θ)/(θ×f(θ)) 계산
+절대 금지: 극한 전 수치 대입, θ=0으로 바로 놓기
+정삼각형 STU: UT∥AB → 한 변 길이를 R 좌표로 표현 후 넓이 = (√3/4)×변²`
+
     const systemPrompt = isMultipleChoice
       ? `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 말 최소화. 표 사용 금지.
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${hardModeExtra}
 
 형식:
 **Step 1** $식$
@@ -81,7 +99,7 @@ PB = PC = PA (접선 길이), 부채꼴 넓이 = ½ × PB² × ∠BPC (라디안
 **정답: ③**`
       : `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 말 최소화. 표 사용 금지.
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${hardModeExtra}
 
 형식:
 **Step 1** $식$
@@ -100,7 +118,7 @@ $$\\boxed{answer}$$`
         ]
       : userPrompt
 
-    const maxTokens = (hardMode || isHTproblem) ? 5000
+    const maxTokens = (hardMode || isHTproblem || compressedImage) ? 5000
       : isMultipleChoice ? 3000
       : 2500
 
