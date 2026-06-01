@@ -112,11 +112,9 @@ $$\\boxed{answer}$$`
       : 2500
 
     const stream = await anthropic.messages.stream({
-      model: "claude-opus-4-8",
+      model: "claude-sonnet-4-6",
       max_tokens: maxTokens,
       temperature: 0,
-      // @ts-ignore fast mode (research preview)
-      speed: "fast",
       system: systemPrompt,
       messages: [{ role: "user", content: claudeContent }],
     })
