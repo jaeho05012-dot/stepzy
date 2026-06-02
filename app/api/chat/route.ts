@@ -109,10 +109,14 @@ PB = PC = PA (접선 길이), 부채꼴 넓이 = ½ × PB² × ∠BPC (라디안
 1. 좌표계: A=(-1,0), B=(1,0), 반원 중심 O=(0,0)
 2. 각도 조건으로 직선 AP, BQ 방정식 세우기
 3. 교점 R 좌표를 θ로 표현
+★ 원주각-중심각: ∠QBA=2θ는 원주각 → 중심각 ∠AOQ=4θ (반드시 2배!)
+   Q = (-cos4θ, sin4θ) ← 4θ 사용, 2θ 절대 금지
+   sin4θ≈4θ, 1-cos4θ≈8θ² (θ→0 근사)
 4. θ→0 극한: tanθ≈θ, sinθ≈θ, cosθ≈1 근사 사용
 5. f(θ), g(θ)를 θ의 거듭제곱으로 표현
 6. 극한값 = g(θ)/(θ×f(θ)) 계산
-절대 금지: 극한 전 수치 대입, θ=0으로 바로 놓기
+절대 금지: 극한 전 수치 대입, θ=0으로 바로 놓기, 원주각을 중심각으로 착각(∠QBA=2θ → ∠AOQ=4θ임)
+★ f(θ) 계산 방법: 활꼴(부채꼴OAQ - 삼각형OAQ) + 삼각형ARQ 로 바로 분해. 다른 방법 탐색 없이 이 방향으로만 풀어라.
 정삼각형 STU: UT∥AB → 한 변 길이를 R 좌표로 표현 후 넓이 = (√3/4)×변²`
 
     const hardModeExtra = (hardMode || isHTproblem) ? `
@@ -195,7 +199,7 @@ ${mathCore}
 
     // ── 7. 스트리밍 ──
     const model = (isMathProblem || context) ? "claude-opus-4-8" : "claude-sonnet-4-6"
-    const stream = await client.messages.stream({
+    const stream = client.messages.stream({
       model,
       max_tokens: maxTokens,
       system: systemPrompt,

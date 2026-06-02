@@ -60,20 +60,20 @@ export function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 px-4 py-4"
+      className="fixed top-0 left-0 right-0 z-50 px-3 py-2 md:px-4 md:py-3"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between px-6 py-3 rounded-2xl bg-card/50 backdrop-blur-xl border border-border/50">
+        <div className="flex items-center justify-between px-3 py-2 md:px-6 md:py-3 rounded-2xl bg-card/50 backdrop-blur-xl border border-border/50">
 
           <Link href="/" className="flex items-center gap-2 group">
             <motion.div
-              className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <Sparkles className="w-5 h-5 text-background" />
+              <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-background" />
             </motion.div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="text-base md:text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Stepzy
             </span>
           </Link>
@@ -175,9 +175,9 @@ export function Navbar() {
             ) : (
               /* ✅ 비로그인 상태 — 기존 버튼들 */
               <>
-                <Link href="/login">
+                <Link href="/login" className="hidden sm:block">
                   <motion.button
-                    className="px-5 py-2.5 rounded-xl text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                    className="px-3 py-1.5 md:px-5 md:py-2.5 rounded-xl text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -185,9 +185,9 @@ export function Navbar() {
                   </motion.button>
                 </Link>
 
-                <Link href="/login?tab=signup">
+                <Link href="/login?tab=signup" className="hidden sm:block">
                   <motion.button
-                    className="px-5 py-2.5 rounded-xl border border-primary/40 text-primary font-semibold text-sm hover:bg-primary/10 hover:border-primary/70 transition-all"
+                    className="px-3 py-1.5 md:px-5 md:py-2.5 rounded-xl border border-primary/40 text-primary font-semibold text-sm hover:bg-primary/10 hover:border-primary/70 transition-all"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -197,7 +197,7 @@ export function Navbar() {
 
                 <Link href="/login">
                   <motion.button
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-background font-semibold text-sm hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] transition-shadow"
+                    className="px-3 py-1.5 md:px-5 md:py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-background font-semibold text-sm hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] transition-shadow"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >

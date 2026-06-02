@@ -470,12 +470,12 @@ function SolvePageInner() {
           <div className="fixed inset-0 z-40 flex flex-col" style={{ background: "#080808" }}>
             <Scene3D />
 
-            <div className="relative z-10 flex items-center justify-between px-6 py-3 backdrop-blur-xl flex-shrink-0"
+            <div className="relative z-10 flex items-center justify-between px-3 py-2 md:px-6 md:py-3 backdrop-blur-xl flex-shrink-0"
               style={{ background: "#080808", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 md:gap-4">
                 <Link href="/"><MotionButton label="Back" /></Link>
-                <div className="w-px h-6 bg-border/20" />
-                <div className="flex items-center gap-2.5">
+                <div className="w-px h-5 bg-border/20" />
+                <div className="flex items-center gap-2">
                   <motion.div
                     animate={{ boxShadow: ["0 0 8px rgba(20,184,166,0.3)", "0 0 20px rgba(20,184,166,0.6)", "0 0 8px rgba(20,184,166,0.3)"] }}
                     transition={{ duration: 2, repeat: Infinity }}
@@ -493,11 +493,11 @@ function SolvePageInner() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground/30 mr-1">Switch to:</span>
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="hidden md:inline text-xs text-muted-foreground/30 mr-1">Switch to:</span>
                 {tabs.filter(tab => tab.id !== "chat").map(({ id, label, icon: Icon }) => (
-                  <StarButton key={id} onClick={() => switchTab(id)} lightColor="rgba(20,184,166,0.9)" backgroundColor="rgba(20,184,166,0.06)" borderWidth={1} duration={2.5} lightWidth={80} className="bg-card/10 hover:bg-card/30 text-xs">
-                    <Icon className="w-3.5 h-3.5" />{label}
+                  <StarButton key={id} onClick={() => switchTab(id)} lightColor="rgba(20,184,166,0.9)" backgroundColor="rgba(20,184,166,0.06)" borderWidth={1} duration={2.5} lightWidth={80} className="bg-card/10 hover:bg-card/30 text-xs px-2 py-1.5 md:px-3 md:py-2">
+                    <Icon className="w-3.5 h-3.5" /><span className="hidden sm:inline">{label}</span>
                   </StarButton>
                 ))}
                 <div className="ml-1 pl-2 border-l border-border/20"><SettingsPanel /></div>
@@ -687,36 +687,38 @@ function SolvePageInner() {
 
         {activeTab !== "chat" && (
           <>
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-7 left-10 z-50">
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-3 left-3 md:top-7 md:left-10 z-50">
               <Link href="/"><MotionButton label="Back" /></Link>
             </motion.div>
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-7 right-10 z-[200]">
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-3 right-3 md:top-7 md:right-10 z-[200]">
               <SettingsPanel />
             </motion.div>
 
-            <div className="relative min-h-screen flex items-center justify-center px-6 py-24">
+            <div className="relative min-h-screen flex items-center justify-center px-4 py-16 md:px-6 md:py-24">
               <div className="w-full max-w-5xl mx-auto">
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-14">
-                  <div className="inline-flex items-center gap-2 px-5 py-2.5 mb-8 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-medium text-primary">{t.badge}</span>
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-8 md:mb-14">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-5 md:py-2.5 mb-4 md:mb-8 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                    <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                    <span className="text-xs md:text-sm font-medium text-primary">{t.badge}</span>
                   </div>
-                  <h1 className="text-6xl md:text-7xl font-black mb-5 text-foreground tracking-tight">
+                  <h1 className="text-3xl md:text-6xl lg:text-7xl font-black mb-3 md:mb-5 text-foreground tracking-tight">
                     {t.uploadYour}{" "}
                     <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{t.problem}</span>
                   </h1>
-                  <p className="text-xl text-muted-foreground">{t.heroSubtitle}</p>
+                  <p className="text-base md:text-xl text-muted-foreground">{t.heroSubtitle}</p>
                 </motion.div>
 
                 {/* 탭 + 고난도 토글 */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="flex justify-center items-center gap-4 mb-10">
-                  <div className="inline-flex p-1.5 gap-1 rounded-2xl backdrop-blur-xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="flex justify-center items-center gap-2 md:gap-4 mb-6 md:mb-10">
+                  <div className="inline-flex p-1 md:p-1.5 gap-0.5 md:gap-1 rounded-2xl backdrop-blur-xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
                     {tabs.map(({ id, label, icon: Icon }) => (
-                      <button key={id} onClick={() => switchTab(id)}
-                        className={cn("flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200",
+                      <motion.button key={id} onClick={() => switchTab(id)}
+                        whileTap={{ scale: 0.95 }}
+                        className={cn("flex items-center gap-1.5 px-2.5 py-2 md:px-6 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-200",
                           activeTab === id ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-foreground hover:bg-white/5")}>
-                        <Icon className="w-4 h-4" />{label}
-                      </button>
+                        <Icon className="w-4 h-4 flex-shrink-0" />
+                        <span className="hidden sm:inline">{label}</span>
+                      </motion.button>
                     ))}
                   </div>
                   <HardModeToggle enabled={hardMode} onChange={setHardMode} />
@@ -743,11 +745,11 @@ function SolvePageInner() {
                     {activeTab === "upload" && !uploadedImage && (
                       <motion.div key="upload" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }}
                         onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
-                        className={cn("relative p-20 rounded-3xl border-2 border-dashed transition-all duration-300",
+                        className={cn("relative p-8 md:p-20 rounded-3xl border-2 border-dashed transition-all duration-300",
                           isDragging ? "border-primary bg-primary/5 scale-[1.02]" : hardMode ? "border-yellow-500/30 hover:border-yellow-500/50" : "border-border/30 hover:border-primary/40 hover:bg-white/[0.02]")}
                         style={{ background: isDragging ? undefined : "rgba(255,255,255,0.02)", backdropFilter: "blur(20px)" }}>
-                        <div className="flex flex-col items-center gap-8">
-                          <motion.div className="w-28 h-28 rounded-3xl flex items-center justify-center"
+                        <div className="flex flex-col items-center gap-5 md:gap-8">
+                          <motion.div className="w-16 h-16 md:w-28 md:h-28 rounded-3xl flex items-center justify-center"
                             style={hardMode ? {
                               background: "linear-gradient(135deg, rgba(251,191,36,0.25), rgba(245,158,11,0.08))",
                               border: "1px solid rgba(251,191,36,0.35)",
@@ -758,16 +760,16 @@ function SolvePageInner() {
                               boxShadow: "0 0 40px rgba(20,184,166,0.2)",
                             }}
                             animate={isDragging ? { scale: 1.1, rotate: 5 } : { scale: 1, rotate: 0 }}>
-                            <Upload className="w-14 h-14" style={{ color: hardMode ? "#fbbf24" : "var(--primary)" }} />
+                            <Upload className="w-8 h-8 md:w-14 md:h-14" style={{ color: hardMode ? "#fbbf24" : "var(--primary)" }} />
                           </motion.div>
                           <div className="text-center">
-                            <p className="text-2xl font-bold text-foreground mb-3">{isDragging ? t.dropHere : t.dragDrop}</p>
-                            <p className="text-muted-foreground text-lg mb-8">{t.orBrowse}</p>
+                            <p className="text-lg md:text-2xl font-bold text-foreground mb-2 md:mb-3">{isDragging ? t.dropHere : t.dragDrop}</p>
+                            <p className="text-muted-foreground text-sm md:text-lg mb-4 md:mb-8">{t.orBrowse}</p>
                           </div>
                           <label>
                             <input type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
                             <motion.div
-                              className="flex items-center gap-2 px-10 py-4 rounded-2xl font-bold text-lg cursor-pointer transition-shadow"
+                              className="flex items-center gap-2 px-6 py-3 md:px-10 md:py-4 rounded-2xl font-bold text-base md:text-lg cursor-pointer transition-shadow"
                               style={hardMode ? {
                                 background: "linear-gradient(135deg, #f59e0b, #d97706)",
                                 color: "black",
@@ -789,19 +791,19 @@ function SolvePageInner() {
                       <motion.div key="camera" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }}
                         className="relative rounded-3xl border border-border/30 overflow-hidden" style={{ background: "rgba(255,255,255,0.02)", backdropFilter: "blur(20px)" }}>
                         {!cameraActive ? (
-                          <div className="flex flex-col items-center gap-8 p-20">
-                            <div className="w-28 h-28 rounded-3xl flex items-center justify-center"
+                          <div className="flex flex-col items-center gap-5 md:gap-8 p-8 md:p-20">
+                            <div className="w-16 h-16 md:w-28 md:h-28 rounded-3xl flex items-center justify-center"
                               style={{ background: "linear-gradient(135deg, rgba(20,184,166,0.25), rgba(20,184,166,0.08))", border: "1px solid rgba(20,184,166,0.35)", boxShadow: "0 0 40px rgba(20,184,166,0.2)" }}>
-                              <Camera className="w-14 h-14 text-primary" />
+                              <Camera className="w-8 h-8 md:w-14 md:h-14 text-primary" />
                             </div>
                             <div className="text-center">
-                              <p className="text-2xl font-bold text-foreground mb-3">{t.captureCamera}</p>
-                              <p className="text-muted-foreground text-lg mb-8">{t.cameraSubtitle}</p>
+                              <p className="text-lg md:text-2xl font-bold text-foreground mb-2 md:mb-3">{t.captureCamera}</p>
+                              <p className="text-muted-foreground text-sm md:text-lg mb-4 md:mb-8">{t.cameraSubtitle}</p>
                             </div>
                             <motion.button onClick={startCamera}
-                              className="flex items-center gap-2 px-10 py-4 rounded-2xl bg-gradient-to-r from-primary to-accent text-background font-bold text-lg hover:shadow-[0_0_40px_rgba(20,184,166,0.35)] transition-shadow"
+                              className="flex items-center gap-2 px-6 py-3 md:px-10 md:py-4 rounded-2xl bg-gradient-to-r from-primary to-accent text-background font-bold text-base md:text-lg hover:shadow-[0_0_40px_rgba(20,184,166,0.35)] transition-shadow"
                               whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
-                              <Camera className="w-6 h-6" />{t.startCamera}
+                              <Camera className="w-5 h-5 md:w-6 md:h-6" />{t.startCamera}
                             </motion.button>
                           </div>
                         ) : (
@@ -823,15 +825,15 @@ function SolvePageInner() {
                     {activeTab === "type" && !uploadedImage && !isAnalyzing && !hasSolution && (
                       <motion.div key="type" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }}
                         className="rounded-3xl border border-border/30 overflow-hidden" style={{ background: "rgba(255,255,255,0.02)", backdropFilter: "blur(20px)" }}>
-                        <div className="p-10">
+                        <div className="p-5 md:p-10">
                           <textarea value={typedProblem} onChange={e => setTypedProblem(e.target.value)} placeholder={t.typePlaceholder}
-                            className="w-full h-56 bg-transparent text-foreground placeholder:text-muted-foreground/40 resize-none outline-none text-xl leading-relaxed" />
+                            className="w-full h-40 md:h-56 bg-transparent text-foreground placeholder:text-muted-foreground/40 resize-none outline-none text-base md:text-xl leading-relaxed" />
                           <div className="flex justify-between items-center mt-4 pt-4 border-t border-border/20">
                             <span className="text-sm text-muted-foreground/50">{typedProblem.length} characters</span>
                             <motion.button onClick={() => { if (typedProblem.trim()) analyzeWithAI(typedProblem) }}
-                              className="flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary to-accent text-background font-bold text-lg hover:shadow-[0_0_40px_rgba(20,184,166,0.35)] transition-shadow"
+                              className="flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-2xl bg-gradient-to-r from-primary to-accent text-background font-bold text-base md:text-lg hover:shadow-[0_0_40px_rgba(20,184,166,0.35)] transition-shadow"
                               whileHover={{ scale: typedProblem.trim() ? 1.04 : 1 }} whileTap={{ scale: 0.98 }}>
-                              <Sparkles className="w-5 h-5" />{t.solve}
+                              <Sparkles className="w-4 h-4 md:w-5 md:h-5" />{t.solve}
                             </motion.button>
                           </div>
                         </div>
@@ -853,17 +855,17 @@ function SolvePageInner() {
                     {uploadedImage && !isAnalyzing && (
                       <motion.div key="image-result" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
                         <div className="relative rounded-3xl overflow-hidden border border-border/30" style={{ background: "rgba(255,255,255,0.02)", backdropFilter: "blur(20px)" }}>
-                          <img src={uploadedImage} alt="Uploaded problem" className="w-full max-h-96 object-contain" />
+                          <img src={uploadedImage} alt="Uploaded problem" className="w-full max-h-64 md:max-h-96 object-contain" />
                           <motion.button onClick={clearAll} className="absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-sm border border-border/50 hover:bg-destructive/20 transition-all"
                             style={{ background: "rgba(0,0,0,0.5)" }} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                             <X className="w-5 h-5" />
                           </motion.button>
                         </div>
                         {hasSolution && (
-                          <div className="p-10 rounded-3xl border border-primary/20" style={{ background: "rgba(20,184,166,0.03)", backdropFilter: "blur(20px)" }}>
-                            <div className="flex items-center gap-3 mb-8">
-                              <CheckCircle className="w-7 h-7 text-primary" />
-                              <h3 className="text-2xl font-bold text-foreground">{t.solution}</h3>
+                          <div className="p-5 md:p-10 rounded-3xl border border-primary/20" style={{ background: "rgba(20,184,166,0.03)", backdropFilter: "blur(20px)" }}>
+                            <div className="flex items-center gap-3 mb-5 md:mb-8">
+                              <CheckCircle className="w-5 h-5 md:w-7 md:h-7 text-primary" />
+                              <h3 className="text-lg md:text-2xl font-bold text-foreground">{t.solution}</h3>
                               {hardMode && (
                                 <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-bold"
                                   style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)", color: "#fbbf24" }}>
@@ -879,10 +881,10 @@ function SolvePageInner() {
 
                     {activeTab === "type" && hasSolution && !uploadedImage && !isAnalyzing && (
                       <motion.div key="type-solution" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                        className="p-10 rounded-3xl border border-primary/20" style={{ background: "rgba(20,184,166,0.03)", backdropFilter: "blur(20px)" }}>
-                        <div className="flex items-center gap-3 mb-8">
-                          <CheckCircle className="w-7 h-7 text-primary" />
-                          <h3 className="text-2xl font-bold text-foreground">{t.solution}</h3>
+                        className="p-5 md:p-10 rounded-3xl border border-primary/20" style={{ background: "rgba(20,184,166,0.03)", backdropFilter: "blur(20px)" }}>
+                        <div className="flex items-center gap-3 mb-5 md:mb-8">
+                          <CheckCircle className="w-5 h-5 md:w-7 md:h-7 text-primary" />
+                          <h3 className="text-lg md:text-2xl font-bold text-foreground">{t.solution}</h3>
                           {hardMode && (
                             <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-bold"
                               style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)", color: "#fbbf24" }}>
