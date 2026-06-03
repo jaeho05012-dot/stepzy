@@ -84,7 +84,7 @@ export function Navbar() {
             <a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 md:gap-3">
             {user ? (
               /* ✅ 로그인 상태 — 프로필 아바타 */
               <div className="relative" ref={dropdownRef}>
@@ -197,7 +197,7 @@ export function Navbar() {
 
                 <Link href="/login">
                   <motion.button
-                    className="px-3 py-1.5 md:px-5 md:py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-background font-semibold text-sm hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] transition-shadow"
+                    className="px-2.5 py-1.5 md:px-5 md:py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-background font-semibold text-xs md:text-sm hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] transition-shadow"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >

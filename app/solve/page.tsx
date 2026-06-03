@@ -520,7 +520,7 @@ function SolvePageInner() {
                         Ask me anything — math, science, study tips, or anything you&apos;re curious about.
                       </p>
                     </div>
-                    <div className="grid grid-cols-2 gap-2.5 w-full max-w-md">
+                    <div className="grid grid-cols-2 gap-2 w-full max-w-sm">
                       {[
                         { icon: "📐", text: "Solve a math problem", sub: "Step-by-step" },
                         { icon: "📖", text: "Explain a concept", sub: "Clear explanation" },
@@ -529,12 +529,12 @@ function SolvePageInner() {
                       ].map(({ icon, text, sub }) => (
                         <motion.button key={text} onClick={() => sendChatMessage(text)}
                           whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }}
-                          className="flex items-start gap-3 px-4 py-3.5 rounded-xl text-left transition-all"
+                          className="flex items-start gap-2 px-3 py-2.5 rounded-xl text-left transition-all"
                           style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                          <span className="text-xl mt-0.5">{icon}</span>
+                          <span className="text-base">{icon}</span>
                           <div>
-                            <p className="text-sm font-semibold text-foreground">{text}</p>
-                            <p className="text-xs text-muted-foreground/50 mt-0.5">{sub}</p>
+                            <p className="text-xs font-semibold text-foreground">{text}</p>
+                            <p className="text-[10px] text-muted-foreground/50 mt-0.5">{sub}</p>
                           </div>
                         </motion.button>
                       ))}
