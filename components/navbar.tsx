@@ -92,7 +92,7 @@ export function Navbar() {
                   onClick={() => setShowDropdown(!showDropdown)}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all"
+                  className="flex items-center gap-2 px-2 py-1.5 md:gap-2.5 md:px-3 md:py-2 rounded-xl transition-all"
                   style={{
                     background: "rgba(255,255,255,0.05)",
                     border: "1px solid rgba(255,255,255,0.1)",
@@ -108,7 +108,7 @@ export function Navbar() {
                   >
                     {getInitial()}
                   </div>
-                  <span className="text-sm font-medium text-foreground max-w-[100px] truncate">
+                  <span className="hidden sm:inline text-sm font-medium text-foreground max-w-[100px] truncate">
                     {getDisplayName()}
                   </span>
                   <motion.div animate={{ rotate: showDropdown ? 180 : 0 }} transition={{ duration: 0.2 }}>

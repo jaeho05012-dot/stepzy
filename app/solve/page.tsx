@@ -62,13 +62,13 @@ const SolutionContent = ({ solution }: { solution: string }) => (
       remarkPlugins={[remarkMath]}
       rehypePlugins={[[rehypeKatex, { strict: false, throwOnError: false }]]}
       components={{
-        p: ({ children }) => <p className="text-foreground/90 leading-relaxed text-base mb-3">{children}</p>,
+        p: ({ children }) => <p className="text-foreground/90 leading-relaxed text-sm md:text-base mb-3">{children}</p>,
         strong: ({ children }) => <strong className="text-foreground font-bold">{children}</strong>,
-        code: ({ children }) => <code className="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-sm font-mono">{children}</code>,
+        code: ({ children }) => <code className="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-xs md:text-sm font-mono">{children}</code>,
         pre: ({ children }) => <pre className="bg-black/30 border border-border/50 rounded-2xl p-4 overflow-x-auto my-4">{children}</pre>,
-        h1: ({ children }) => <h1 className="text-foreground font-bold text-2xl mb-3">{children}</h1>,
-        h2: ({ children }) => <h2 className="text-foreground font-bold text-xl mb-2">{children}</h2>,
-        h3: ({ children }) => <h3 className="text-foreground font-semibold text-lg mb-2">{children}</h3>,
+        h1: ({ children }) => <h1 className="text-foreground font-bold text-xl md:text-2xl mb-3">{children}</h1>,
+        h2: ({ children }) => <h2 className="text-foreground font-bold text-lg md:text-xl mb-2">{children}</h2>,
+        h3: ({ children }) => <h3 className="text-foreground font-semibold text-base md:text-lg mb-2">{children}</h3>,
         li: ({ children }) => <li className="text-foreground/80 leading-relaxed">{children}</li>,
       }}
     >
@@ -493,11 +493,11 @@ function SolvePageInner() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 md:gap-2">
+              <div className="flex items-center gap-1 md:gap-1.5">
                 <span className="hidden md:inline text-xs text-muted-foreground/30 mr-1">Switch to:</span>
                 {tabs.filter(tab => tab.id !== "chat").map(({ id, label, icon: Icon }) => (
-                  <StarButton key={id} onClick={() => switchTab(id)} lightColor="rgba(20,184,166,0.9)" backgroundColor="rgba(20,184,166,0.06)" borderWidth={1} duration={2.5} lightWidth={80} className="bg-card/10 hover:bg-card/30 text-xs px-2 py-1.5 md:px-3 md:py-2">
-                    <Icon className="w-3.5 h-3.5" /><span className="hidden sm:inline">{label}</span>
+                  <StarButton key={id} onClick={() => switchTab(id)} lightColor="rgba(20,184,166,0.9)" backgroundColor="rgba(20,184,166,0.06)" borderWidth={1} duration={2.5} lightWidth={80} className="bg-card/10 hover:bg-card/30 text-xs min-w-[44px] min-h-[44px] px-2 md:px-3 md:py-2 flex items-center justify-center">
+                    <Icon className="w-4 h-4 md:w-3.5 md:h-3.5" /><span className="hidden sm:inline">{label}</span>
                   </StarButton>
                 ))}
                 <div className="ml-1 pl-2 border-l border-border/20"><SettingsPanel /></div>
@@ -570,7 +570,7 @@ function SolvePageInner() {
               </div>
             </div>
 
-            <div className="relative z-10 px-4 pb-5 pt-3 flex-shrink-0" style={{ background: "#080808" }}>
+            <div className="relative z-10 px-4 pt-3 flex-shrink-0" style={{ background: "#080808", paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}>
               <div className="max-w-3xl mx-auto">
                 <div className="rounded-3xl overflow-hidden transition-all duration-300"
                   style={{ background: "rgba(31,32,35,0.95)", border: isListening ? "1px solid rgba(20,184,166,0.5)" : "1px solid rgba(68,68,68,0.8)", boxShadow: "0 8px 30px rgba(0,0,0,0.24)" }}>
@@ -644,7 +644,7 @@ function SolvePageInner() {
                     </div>
                   </div>
                 </div>
-                <p className="text-xs text-gray-600 mt-2 text-center">Enter to send · Shift+Enter for new line</p>
+                <p className="hidden sm:block text-xs text-gray-600 mt-2 text-center">Enter to send · Shift+Enter for new line</p>
               </div>
             </div>
 
@@ -709,12 +709,12 @@ function SolvePageInner() {
                 </motion.div>
 
                 {/* 탭 + 고난도 토글 */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="flex justify-center items-center gap-2 md:gap-4 mb-6 md:mb-10">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="flex flex-col gap-2 md:flex-row md:gap-4 justify-center items-center mb-6 md:mb-10">
                   <div className="inline-flex p-1 md:p-1.5 gap-0.5 md:gap-1 rounded-2xl backdrop-blur-xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
                     {tabs.map(({ id, label, icon: Icon }) => (
                       <motion.button key={id} onClick={() => switchTab(id)}
                         whileTap={{ scale: 0.95 }}
-                        className={cn("flex items-center gap-1.5 px-2.5 py-2 md:px-6 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-200",
+                        className={cn("flex items-center gap-1.5 min-h-[44px] px-3 md:px-6 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-200",
                           activeTab === id ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-foreground hover:bg-white/5")}>
                         <Icon className="w-4 h-4 flex-shrink-0" />
                         <span className="hidden sm:inline">{label}</span>
@@ -842,10 +842,10 @@ function SolvePageInner() {
 
                     {isAnalyzing && (
                       <motion.div key="analyzing" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                        className="p-16 rounded-3xl border border-border/30" style={{ background: "rgba(255,255,255,0.02)", backdropFilter: "blur(20px)" }}>
+                        className="p-8 md:p-16 rounded-3xl border border-border/30" style={{ background: "rgba(255,255,255,0.02)", backdropFilter: "blur(20px)" }}>
                         <div className="flex items-center justify-center gap-4">
-                          <Loader2 className="w-7 h-7 animate-spin" style={{ color: hardMode ? "#fbbf24" : "var(--primary)" }} />
-                          <span className="text-xl font-medium text-foreground">
+                          <Loader2 className="w-6 h-6 md:w-7 md:h-7 animate-spin" style={{ color: hardMode ? "#fbbf24" : "var(--primary)" }} />
+                          <span className="text-base md:text-xl font-medium text-foreground">
                             {hardMode ? "Stepzy Pro가 분석 중..." : t.aiAnalyzing}
                           </span>
                         </div>
