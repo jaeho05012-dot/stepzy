@@ -33,7 +33,7 @@ export default function Home() {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-7 right-10 z-[200]"
+        className="fixed top-[52px] right-3 md:top-7 md:right-10 z-[200]"
       >
         <SettingsPanel />
       </motion.div>
