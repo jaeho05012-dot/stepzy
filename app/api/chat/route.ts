@@ -119,6 +119,25 @@ PB = PC = PA (접선 길이), 부채꼴 넓이 = ½ × PB² × ∠BPC (라디안
 ★ f(θ) 계산 방법: 활꼴(부채꼴OAQ - 삼각형OAQ) + 삼각형ARQ 로 바로 분해. 다른 방법 탐색 없이 이 방향으로만 풀어라.
 정삼각형 STU: UT∥AB → 한 변 길이를 R 좌표로 표현 후 넓이 = (√3/4)×변²`
 
+    const absHtRule = `
+[|g(x)-t| 또는 p(x)=|g(x)-t| 미분불가능 개수 문제인 경우]
+미분불가능점 두 종류:
+1. g(x)=t 이고 g'(x)=0인 점 (절댓값 꺾임 + 수평접선)
+2. g(x) 자체가 미분불가능한 점 (단, g(x)가 전체 미분가능이면 이 경우 없음)
+h(t) = 위 두 종류 합산
+g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
+절대 금지: g'(x)=0인 점만 세거나 g(x)=t인 점만 세는 것`
+
+    const absRootRule = `
+[|f(x)|=t 실근 개수를 h(t)로 정의하고 수열 aₙ=h(n) 문제인 경우]
+1. f(x) 극대/극소값 파악 (f'(x)=0 풀기)
+2. y=|f(x)| 그래프: f(x)<0 구간을 위로 접기
+3. |f(x)| 극값들 파악 (원래 극값 + x축 대칭으로 생긴 새 극값)
+4. h(t) = y=t와 y=|f(x)| 교점 개수
+5. aₙ=h(n): 자연수 n마다 교점 개수 계산
+6. 조건으로 f(x) 확정 후 f(k) 계산
+절대 금지: |f(x)| 변환 없이 f(x) 그래프로 교점 세기`
+
     const hardModeExtra = (hardMode || isHTproblem) ? `
 ⚠️ 고난도 문제 — 반드시 이 순서:
 1. 풀기 전 문제 구조 한 줄 파악
@@ -141,7 +160,7 @@ $$\\boxed{answer}$$`
 
     const mathCore = `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 말 최소화. 표 사용 금지.
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${hardModeExtra}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${absHtRule}${absRootRule}${hardModeExtra}
 
 ${mathFormat}`
 
@@ -198,7 +217,11 @@ ${mathCore}
         : 2000
 
     // ── 7. 스트리밍 ──
-    const model = (isMathProblem || context) ? "claude-opus-4-8" : "claude-sonnet-4-6"
+    const model = hardMode
+      ? "claude-opus-4-6"
+      : (isMathProblem || context)
+        ? "claude-opus-4-8"
+        : "claude-sonnet-4-6"
     const stream = client.messages.stream({
       model,
       max_tokens: maxTokens,
