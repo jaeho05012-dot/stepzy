@@ -144,6 +144,18 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
 ★ 절대 금지: |f(x)| 변환 없이 f(x) 그래프로 교점 세기
 ★ Σaₙ 패턴 분석 없이 바로 f(x) 설정하기`
 
+    const absGQuarticRule = `
+[p(x)=|g(x)-t| 미분불가능 + g(x) 사차 조각함수 문제]
+1. x=0 연속·미분가능: 24-f(k)=f(0), -f'(k)=f'(0)
+2. f(0)=4 → f(k)=20, f'(0)=0, f'(k)=0
+3. f'(x)=4x(x-k)(x-m), m>k (극소점 추가)
+4. ∫₀ᵏ f'(x)dx = f(k)-f(0) = 16으로 k³(2m-k)=48
+5. g(x) 극값이 4,20만 되려면 f(m)≤0 또는 f(m)=4
+6. f(m)=4이면 m=2k → k⁴=16 → k=2, m=4
+7. f(x) = x⁴-8x³+16x²+4 → f(k+3)=f(5)=29
+★ g(x) x<0 부분 극값도 반드시 확인
+★ h(t) 불연속점 = g(x) 극값 (양수만)`
+
     const hardModeExtra = (hardMode || isHTproblem) ? `
 ⚠️ 고난도 문제 — 반드시 이 순서:
 1. 풀기 전 문제 구조 한 줄 파악
@@ -166,7 +178,7 @@ $$\\boxed{answer}$$`
 
     const mathCore = `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 말 최소화. 표 사용 금지.
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${absHtRule}${absRootRule}${hardModeExtra}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
 
 ${mathFormat}`
 
