@@ -144,6 +144,32 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
 ★ 절대 금지: |f(x)| 변환 없이 f(x) 그래프로 교점 세기
 ★ Σaₙ 패턴 분석 없이 바로 f(x) 설정하기`
 
+    const gLimitRule = `
+[g(x)/x(x-2) 극한 존재 + 조각함수 연속 문제]
+1. g(x) 연속: f(t)=0 (x=t에서 -f=f)
+2. lim g(x)/x(x-2) 모든 a에서 존재
+   → x=0, x=2에서 g(0)=0, g(2)=0
+3. g(x)/x(x-2) 극한값 부호 분석:
+   x=m에서 우극한 음수 → 분자/분모 부호 따짐
+4. 집합 조건으로 m값 결정
+5. f(x) 확정 후 g(-5) 계산
+★ g(0)=0, g(2)=0이 f(x) 영점 조건 결정
+★ 집합 원소 개수로 케이스 분기`
+
+    const polyDivRule = `
+[Q(x²)²+P(x)² 나누어떨어짐 + Q(x+1)-Q(x) 조건 문제]
+1. Q(x+1)-Q(x) = (x+1)³-x³ 확인 → Q(x)=x³+c, Q(0)으로 c 결정
+2. x=i 대입: Q(-1)²+P(i)²=0 → P(i)=±i
+3. P(x)=x⁴+ax³+5x²+(a+s)x+4 (s=±1), P(0)=4
+4. x³≡-2(mod Q(x)) 이용해 나머지 바로 계산:
+   r(x)=5x²+(a+s-2)x+(4-2a)
+5. r(1)=계수합=2 → a=s+5
+6. P(1)<조건으로 s 결정: s=1이면 a=6, s=-1이면 a=4
+7. r(2) 계산
+★ x³≡-2(mod x³+2) 치환이 핵심
+★ P(i)=±i → 실수부=0, 허수부=±1
+★ 절대 금지: Q(x)에 일차항 있다고 가정하기`
+
     const absGQuarticRule = `
 [p(x)=|g(x)-t| 미분불가능 + g(x) 사차 조각함수 문제]
 1. x=0 연속·미분가능: 24-f(k)=f(0), -f'(k)=f'(0)
@@ -178,7 +204,7 @@ $$\\boxed{answer}$$`
 
     const mathCore = `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 말 최소화. 표 사용 금지.
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
 
 ${mathFormat}`
 
