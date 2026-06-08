@@ -115,16 +115,20 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
 ★ h(t) 불연속점 = g(x) 극값 (양수만)`
 
     const gLimitRule = `
-[g(x)/x(x-2) 극한 존재 + 조각함수 연속 문제]
-1. g(x) 연속: f(t)=0 (x=t에서 -f=f)
-2. lim g(x)/x(x-2) 모든 a에서 존재
-   → x=0, x=2에서 g(0)=0, g(2)=0
-3. g(x)/x(x-2) 극한값 부호 분석:
-   x=m에서 우극한 음수 → 분자/분모 부호 따짐
-4. 집합 조건으로 m값 결정
-5. f(x) 확정 후 g(-5) 계산
-★ g(0)=0, g(2)=0이 f(x) 영점 조건 결정
-★ 집합 원소 개수로 케이스 분기`
+[g(x)=-f(x)(x<t), f(x)(x≥t) + g(x)/x(x-2) 극한 문제]
+1. g 연속 → f(t)=0
+2. lim g(x)/x(x-2) 모든 a에서 존재 → g(0)=0, g(2)=0 → f(0)=0, f(2)=0
+3. f(x)=ax(x-2)(x-k), a>0 (최고차항 계수 양수)
+4. t는 f의 근: 0, 2, k 중 하나
+5. lim(x→m+) g(x)/x(x-2) 음수 조건:
+   x>2에서 f(x)<0인 구간의 자연수 m 파악
+6. 집합 원소 2개 → t=2, 3<k≤4, m={2,3}
+7. g(-1)=3a(k+1), g(1)=-a(k-1) 계산
+   집합={g(-1), -7/2·g(1)} 조건으로 a,k 결정
+8. g(-5)=-f(-5) (x<t=2이므로) 계산
+★ g(0)=0, g(2)=0이 f(x) 인수 결정의 핵심
+★ t=2 결정 후 x<2에서 g(x)=-f(x) 적용
+★ 절대 금지: t=0 또는 t=k로 가정하기`
 
     const polyDivRule = `
 [Q(x²)²+P(x)² 나누어떨어짐 + Q(x+1)-Q(x) 조건 문제]
@@ -157,7 +161,8 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
 
     const systemPrompt = isMultipleChoice
       ? `수능 수학 전문가. 식 위주로 간결하게 풀어라.
-규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 말 최소화. 표 사용 금지.
+규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 표 사용 금지.
+⛔ 출력 규칙: ~이므로/~따라서/~입니다 등 완전한 서술 문장 금지. 식과 결과만, → 로 연결. 단, 케이스 분기 이유는 한 단어 수준으로 허용. ❌ "x=i를 대입하면 됩니다" ✅ "x=i → Q(-1)=1 → P(i)=±i"
 ★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
 
 형식:
@@ -166,7 +171,8 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
 ...
 **정답: ③**`
       : `수능 수학 전문가. 식 위주로 간결하게 풀어라.
-규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 말 최소화. 표 사용 금지.
+규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 표 사용 금지.
+⛔ 출력 규칙: ~이므로/~따라서/~입니다 등 완전한 서술 문장 금지. 식과 결과만, → 로 연결. 단, 케이스 분기 이유는 한 단어 수준으로 허용. ❌ "x=i를 대입하면 됩니다" ✅ "x=i → Q(-1)=1 → P(i)=±i"
 ★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
 
 형식:
