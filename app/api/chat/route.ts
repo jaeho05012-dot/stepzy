@@ -144,6 +144,20 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
 ★ 절대 금지: |f(x)| 변환 없이 f(x) 그래프로 교점 세기
 ★ Σaₙ 패턴 분석 없이 바로 f(x) 설정하기`
 
+    const contradictionRule = `
+⚠️ 모순 발견 시: 두 방법으로 같은 값을 구했는데 결과가 다르면 절대 한쪽을 임의로 선택해 진행 금지. 멈추고 어느 단계가 틀렸는지 찾아 처음부터 다시 풀 것.
+⚠️ 수선·수심 도형 문제: 두 수선의 교점이 수심임을 먼저 확정 → 세 번째 수선·닮음 관계 적극 활용.`
+
+    const trigFracRule = `
+[g=1/(c+sin f(x)) 류 합성 분수형 삼각함수 킬러 문항]
+1. 극값 분석은 반드시 g′(x) 직접 계산: g′ = −cos(f)·f′ / (c+sin f)²
+2. 극값 후보 두 부류: f′(x)=0 / cos(f(x))=0 — 둘 다 검토, 한 종류로 단정 금지
+3. "분모 최소=극대" 같은 직관적 단정으로 후보 좁히기 금지
+4. 주어진 g값(예: g(0)=2/5)은 그대로 sin(f) 역산에 사용
+   f의 상수항을 π/2 등 임의 값으로 가정 금지 — 반드시 조건에서 유도
+5. αₙ = g′=0인 점 전체를 오름차순 나열 (극대·극소·f′=0·cos(f)=0 혼재)
+   한 종류라고 단정 금지`
+
     const killer30Rule = `
 [30번 킬러 범용 접근]
 1. 조각함수면 각 구간 경계에서 연속·미분가능 조건 먼저
@@ -218,7 +232,7 @@ $$\\boxed{answer}$$`
     const mathCore = `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 표 사용 금지.
 ⛔ 출력 규칙: ~이므로/~따라서/~입니다 등 완전한 서술 문장 금지. 식과 결과만, → 로 연결. 단, 케이스 분기 이유는 한 단어 수준으로 허용. ❌ "x=i를 대입하면 됩니다" ✅ "x=i → Q(-1)=1 → P(i)=±i"
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${killer30Rule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${contradictionRule}${trigFracRule}${killer30Rule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
 
 ${mathFormat}`
 
