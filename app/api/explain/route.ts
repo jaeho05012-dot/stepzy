@@ -144,6 +144,15 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
 ★ P(i)=±i → 실수부=0, 허수부=±1
 ★ 절대 금지: Q(x)에 일차항 있다고 가정하기`
 
+    const killer30Rule = `
+[30번 킬러 범용 접근]
+1. 조각함수면 각 구간 경계에서 연속·미분가능 조건 먼저
+2. h(n) 유형이면 그래프 그려서 수평선 y=c와 교점 수 패턴 분류
+3. 전역 최솟값/최댓값 조건 → 등호 조건 설정
+4. n=1~5 각각 어느 구간에 속하는지 먼저 결정
+5. 집합 조건 → 각 h값이 모두 달라야 함 → 각 케이스 1개씩 배정
+6. a값은 역산으로 결정`
+
     const semicircleRule = `
 [반원·호 AB·∠PAB·∠QBA·정삼각형 STU 문제인 경우] 반원 기하 극한 — 이 순서 그대로:
 1. 좌표계: A=(-1,0), B=(1,0), 반원 중심 O=(0,0)
@@ -163,7 +172,7 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
       ? `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 표 사용 금지.
 ⛔ 출력 규칙: ~이므로/~따라서/~입니다 등 완전한 서술 문장 금지. 식과 결과만, → 로 연결. 단, 케이스 분기 이유는 한 단어 수준으로 허용. ❌ "x=i를 대입하면 됩니다" ✅ "x=i → Q(-1)=1 → P(i)=±i"
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${killer30Rule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
 
 형식:
 **Step 1** $식$
@@ -173,7 +182,7 @@ g(x) 증감표 먼저 → 극값 파악 → t값별 개수 분류
       : `수능 수학 전문가. 식 위주로 간결하게 풀어라.
 규칙: LaTeX $...$ / $$...$$만 사용. π분수유지. 표 사용 금지.
 ⛔ 출력 규칙: ~이므로/~따라서/~입니다 등 완전한 서술 문장 금지. 식과 결과만, → 로 연결. 단, 케이스 분기 이유는 한 단어 수준으로 허용. ❌ "x=i를 대입하면 됩니다" ✅ "x=i → Q(-1)=1 → P(i)=±i"
-★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
+★ 수식($...$) 안에는 절대 한글을 넣지 마라. 한글 설명은 수식 밖에 써라. 예: ❌ $f(x)는 삼차함수$ → ⭕ $f(x)$는 삼차함수. \text{} 도 쓰지 말고 수식 밖으로 빼라.${sphereRule}${htRule}${tangentRule}${sequenceRule}${probabilityRule}${inverseIntegralRule}${semicircleRule}${killer30Rule}${gLimitRule}${polyDivRule}${absHtRule}${absRootRule}${absGQuarticRule}${hardModeExtra}
 
 형식:
 **Step 1** $식$
